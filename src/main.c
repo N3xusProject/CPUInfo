@@ -178,19 +178,10 @@ uint32_t get_extended_model(void)
 }
 
 
-void get_family(void)
-{
-    cpuid(1, &eax, &ebx, &ecx, &edx);
-    uint32_t model_number = get_model_number();
-    uint32_t extended_model = get_extended_model();
-    uint32_t stepping_level = eax & 0x7;
-}
-
-
 uint8_t get_processor_type(void)
 {
     cpuid(1, &eax, &ebx, &ecx, &edx);
-    return eax & (1 << 13);
+    return eax & (1 << 13) | eax & (1 << 12);
 }
 
 
@@ -201,7 +192,22 @@ int main(void)
 
     printf("CPU MODEL NUMBER - 0x%X\n", get_model_number());
     printf("CPU EXTENDED MODEL - 0x%X\n", get_extended_model());
-    printf("CPU TYPE BIT - 0b%d\n", get_processor_type());
+
+	switch (get_processor_type())
+	{
+		case 0b00:
+			printf("CPU TYPE - Original OEM Processor\n");
+			break;
+		case 0b01:
+			printf("CPU TYPE - Overdrive(R) Processor\n");
+			break;
+		case 0b10:
+			printf("CPU TYPE - Dual Processor\n");
+			break;
+		default:
+			printf("CPU TYPE - Unknown\n");
+			break;
+	}
 
     return 0;
 }
