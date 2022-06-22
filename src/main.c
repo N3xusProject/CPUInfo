@@ -43,9 +43,48 @@
 #define CPUID_VENDOR_HYGON         "HygonGenuine"
 #define CPUID_VENDOR_ELBRUS        "E2K MACHINE "
 
+// CPU feature flags.
+
+typedef enum
+{
+	FF_FPU 		= 		(1 << 0),			// Floating point unit.
+	FF_VME 		= 		(1 << 1),			// Virtual mode extension.
+	FF_DE 		= 		(1 << 2),			// Debugging extension.
+	FF_PSE 		= 		(1 << 3),			// Page size extension.
+	FF_TSC 		= 		(1 << 4),			// Time stamp counter.
+	FF_MSR 		= 		(1 << 5),			// Model specific registers..
+	FF_PAE 		= 		(1 << 6),			// Physical address extension.
+	FF_MCE 		= 		(1 << 7),			// Machien check exception.
+	FF_CX8 		= 		(1 << 8),			// Support for CMPXCHG8 instruction.
+	FF_APIC 	= 		(1 << 9),			// On-Chip Advanced Programmable Interrupt Controller (APIC).
+	FF_SEP 		= 		(1 << 11),			// Fast system call support.
+	FF_MTRR 	= 		(1 << 12),			// Memory type range registers.
+	FF_PGE		=		(1 << 13),			// Page global enable.
+	FF_MCA 		= 		(1 << 14), 			// Machine check architecture.
+	FF_CMOV		= 		(1 << 15),			// Conditional move instruction.
+	FF_PAT 		= 		(1 << 6)			// Page attribute table.
+} FEATURE_FLAG;
 
 uint32_t eax, ebx, ecx, edx;
 
+// Sets a variable called checkmark of type const char* to either a checkmark
+// that is set or not set based on a condition.
+
+const char* set_checkmark(uint8_t condition)
+{
+	static char checkmark[4];
+
+	if (condition)
+	{
+		strcpy(checkmark, "[+]");
+	}
+	else
+	{
+		strcpy(checkmark, "[]");
+	}
+
+	return checkmark;
+}
 
 static inline void cpuid(uint32_t leaf, uint32_t* eax, uint32_t* ebx, uint32_t* ecx, uint32_t* edx)
 {
@@ -188,6 +227,32 @@ uint8_t get_processor_type(void)
 }
 
 
+void feature_dump(void)
+{
+	// Feature flags will be in EDX.
+    cpuid(1, &eax, &ebx, &ecx, &edx);
+
+	printf("\nListing CPU features..\n[x] => supported, [] => not supported\n\n");
+
+	const char* check = "[]";
+
+	printf("On-Chip Floating Point Unit (FPU) %s\n", set_checkmark(edx & FF_FPU));
+	printf("Virtual Mode Extension (VME) %s\n", set_checkmark(edx & FF_VME));
+	printf("Debugging Extension (DE) %s\n", set_checkmark(edx & FF_DE));
+	printf("Page Size Extension (PSE) %s\n", set_checkmark(edx & FF_PSE));
+	printf("Time Stamp Counter (TSC) %s\n", set_checkmark(edx & FF_TSC));
+	printf("Model Specific Registers (MSR) %s\n", set_checkmark(edx & FF_MSR));
+	printf("Physical Address Extension (PAE) %s\n", set_checkmark(edx & FF_PAE));
+	printf("Machine-Check Exception (MCE) %s\n", set_checkmark(edx & FF_MCE));
+	printf("CMPXCHG8 Instruction (CX8) %s\n", set_checkmark(edx & FF_CX8));
+	printf("On-Chip APIC Hardware (APIC) %s\n", set_checkmark(edx & FF_APIC));
+	printf("Fast System Call (SEP) %s\n", set_checkmark(edx & FF_SEP));
+	printf("Page Global Enable (PGE) %s\n", set_checkmark(edx & FF_PGE));
+	printf("Machine-Check Architecture (MCA) %s\n", set_checkmark(edx & FF_MCA));
+	printf("Page Attribute Table (PAT) %s\n", set_checkmark(edx & FF_PAT));
+}
+
+
 int main(void)
 {
     get_vendor(get_vendor_string());
@@ -212,5 +277,7 @@ int main(void)
 			break;
 	}
 
+	// Dump features.
+	feature_dump();
     return 0;
 }
