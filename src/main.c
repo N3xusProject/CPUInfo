@@ -89,7 +89,7 @@ void list_features(void)
 int main(void)
 {
     printf("CPU VENDOR - %s\n", cpu_get_vendor());
-    printf("Number of CPU Thermal Control Circuits: %d\n", cpu_get_n_tcc_count());
+    printf("CPU MODEL NUMBER - 0x%X\n", cpu_get_model_number());
     list_features();
     return 0;
 }
