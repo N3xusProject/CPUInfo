@@ -31,53 +31,64 @@
 // otherwise it will retrurn "[+]"
 char* check(uint8_t condition)
 {
-	if (condition)
-	{
-		return "[+]";
-	}
-	else 
-	{
-		return "[]";
-	}
+    if (condition)
+    {
+        return "[+]";
+    }
+    else 
+    {
+        return "[]";
+    }
 }
 
 
 
 void list_features(void)
 {
-	printf("\n<==== Listing CPU Features ====>\n[+] => Supported, [] => Unsupported\n\n");
-	printf("On-Chip Floating Point Unit %s\n", check(cpu_has_feature(CPU_FPU)));
-	printf("Virtual Mode Extension %s\n", check(cpu_has_feature(CPU_VME)));
-	printf("Debugging Extension %s\n", check(cpu_has_feature(CPU_DE)));
-	printf("Page Size Extension %s\n", check(cpu_has_feature(CPU_PSE)));
-	printf("Time Stamp Counter %s\n", check(cpu_has_feature(CPU_TSC)));
-	printf("Model Specific Registers %s\n", check(cpu_has_feature(CPU_MSR)));
-	printf("Physical Address Extension %s\n", check(cpu_has_feature(CPU_PAE)));
-	printf("Model Check Exception %s\n", check(cpu_has_feature(CPU_MSE)));
-	printf("CMPXCHG8 Instruction %s\n", check(cpu_has_feature(CPU_CX8)));
-	printf("Fast System Call %s\n", check(cpu_has_feature(CPU_SEP)));
-	printf("Memory Type Range %s\n", check(cpu_has_feature(CPU_MTRR)));
-	printf("Page Global Enable %s\n", check(cpu_has_feature(CPU_PGE)));
-	printf("Machine Check Architecture %s\n", check(cpu_has_feature(CPU_MCA)));
-	printf("Conditional Move Instruction %s\n", check(cpu_has_feature(CPU_CMOV)));
-	printf("Page Attribute Table %s\n", check(cpu_has_feature(CPU_PAT)));
-	printf("36-Bit Page Size %s\n", check(cpu_has_feature(CPU_PSE36)));
-	printf("ACPI %s\n", check(cpu_has_feature(CPU_ACPI)));
-	printf("MMX %s\n", check(cpu_has_feature(CPU_MMX)));
-	printf("FXSAVE And FXSTOR Instructions %s\n", check(cpu_has_feature(CPU_FXSR)));
-	printf("Streaming SIMD Extensions %s\n", check(cpu_has_feature(CPU_SSE)));
-	printf("Streaming SIMD Extensions 2 %s\n", check(cpu_has_feature(CPU_SSE2)));
-	printf("Self Snoop %s\n", check(cpu_has_feature(CPU_SS)));
-	printf("Multi-Threading %s\n", check(cpu_has_feature(CPU_HTT)));
-	printf("Thermal Monitor %s\n", check(cpu_has_feature(CPU_TM)));
-	printf("Pending Break Enable %s\n", check(cpu_has_feature(CPU_PBE)));
+    printf("\n<==== Listing CPU Features ====>\n[+] => Supported, [] => Unsupported\n\n");
+    printf("On-Chip Floating Point Unit %s\n", check(cpu_has_feature(CPU_FPU)));
+    printf("Virtual Mode Extension %s\n", check(cpu_has_feature(CPU_VME)));
+    printf("Debugging Extension %s\n", check(cpu_has_feature(CPU_DE)));
+    printf("Page Size Extension %s\n", check(cpu_has_feature(CPU_PSE)));
+    printf("Time Stamp Counter %s\n", check(cpu_has_feature(CPU_TSC)));
+    printf("Model Specific Registers %s\n", check(cpu_has_feature(CPU_MSR)));
+    printf("Physical Address Extension %s\n", check(cpu_has_feature(CPU_PAE)));
+    printf("Model Check Exception %s\n", check(cpu_has_feature(CPU_MSE)));
+    printf("CMPXCHG8 Instruction %s\n", check(cpu_has_feature(CPU_CX8)));
+    printf("Fast System Call %s\n", check(cpu_has_feature(CPU_SEP)));
+    printf("Memory Type Range %s\n", check(cpu_has_feature(CPU_MTRR)));
+    printf("Page Global Enable %s\n", check(cpu_has_feature(CPU_PGE)));
+    printf("Machine Check Architecture %s\n", check(cpu_has_feature(CPU_MCA)));
+    printf("Conditional Move Instruction %s\n", check(cpu_has_feature(CPU_CMOV)));
+    printf("Page Attribute Table %s\n", check(cpu_has_feature(CPU_PAT)));
+    printf("36-Bit Page Size %s\n", check(cpu_has_feature(CPU_PSE36)));
+    printf("ACPI %s\n", check(cpu_has_feature(CPU_ACPI)));
+    printf("MMX %s\n", check(cpu_has_feature(CPU_MMX)));
+    printf("FXSAVE And FXSTOR Instructions %s\n", check(cpu_has_feature(CPU_FXSR)));
+    printf("Streaming SIMD Extensions %s\n", check(cpu_has_feature(CPU_SSE)));
+    printf("Streaming SIMD Extensions 2 %s\n", check(cpu_has_feature(CPU_SSE2)));
+    printf("Self Snoop %s\n", check(cpu_has_feature(CPU_SS)));
+    printf("Multi-Threading %s\n", check(cpu_has_feature(CPU_HTT)));
+    printf("Thermal Monitor %s\n", check(cpu_has_feature(CPU_TM)));
+    printf("Pending Break Enable %s\n", check(cpu_has_feature(CPU_PBE)));
+
+    // CPUID:1[ECX] feature flags.
+    printf("Streaming SIMD Extensions 3 %s\n", check(cpu_has_feature_ecx(CPU_SSE3)));
+    printf("PCMULDQ Instruction %s\n", check(cpu_has_feature_ecx(CPU_PCLMULDQ)));
+    printf("64-Bit Debug Store %s\n", check(cpu_has_feature_ecx(CPU_DTES64)));
+    printf("MONITOR/WAIT Instructions %s\n", check(cpu_has_feature_ecx(CPU_MONITOR)));
+    printf("CPL Qualified Debug Store %s\n", check(cpu_has_feature_ecx(CPU_DSCPL)));
+    printf("Virtual Machine Extensions %s\n", check(cpu_has_feature_ecx(CPU_VMX)));
+    printf("Safer Mode Extensions %s\n", check(cpu_has_feature_ecx(CPU_SMX)));
+    printf("Enhanced Intel SpeedStep(R) Technology %s\n", check(cpu_has_feature_ecx(CPU_EST)));
+    printf("Thermal Monitor 2 %s\n", check(cpu_has_feature_ecx(CPU_TM2)));
 }
 
 
 
 int main(void)
 {
-	printf("CPU VENDOR - %s\n", cpu_get_vendor());
-	list_features();
-	return 0;
+    printf("CPU VENDOR - %s\n", cpu_get_vendor());
+    list_features();
+    return 0;
 }
