@@ -62,7 +62,7 @@ typedef enum
 	FF_PGE		=		(1 << 13),			// Page global enable.
 	FF_MCA 		= 		(1 << 14), 			// Machine check architecture.
 	FF_CMOV		= 		(1 << 15),			// Conditional move instruction.
-	FF_PAT 		= 		(1 << 6)			// Page attribute table.
+	FF_PAT 		= 		(1 << 16)			// Page attribute table.
 } FEATURE_FLAG;
 
 uint32_t eax, ebx, ecx, edx;
