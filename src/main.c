@@ -149,6 +149,10 @@ void get_vendor(const char* vendor_str)
     {
         printf("CPU VENDOR - ELBRUS\n");
     }
+    else
+    {
+        printf("CPU VENDOR - UNKNOWN\n");
+    }
 }
 
 
