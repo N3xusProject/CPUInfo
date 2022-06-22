@@ -13,4 +13,4 @@ type `make`!
 
 ## Screenshot
 
-![Screenshot](https://cdn.discordapp.com/attachments/922953797423202394/989032219639185478/unknown.png)
+![Screenshot](https://media.discordapp.net/attachments/922953797423202394/989210931114414120/unknown.png?width=351&height=464)
