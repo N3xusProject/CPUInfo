@@ -23,10 +23,46 @@
  */
 
 #include <stdio.h>
+#include <stdint.h>
 #include <cpuinfo/cpuinfo.h>
+
+
+// Returns a string "[]" if the condition is false
+// otherwise it will retrurn "[+]"
+char* check(uint8_t condition)
+{
+	if (condition)
+	{
+		return "[+]";
+	}
+	else 
+	{
+		return "[]";
+	}
+}
+
+
+
+void list_features(void)
+{
+	printf("\n<==== Listing CPU Features ====>\n[+] => Supported, [] => Unsupported\n\n");
+	printf("On-Chip Floating Point Unit %s\n", check(cpu_has_feature(CPU_FPU)));
+	printf("Virtual Mode Extension %s\n", check(cpu_has_feature(CPU_VME)));
+	printf("Debugging Extension %s\n", check(cpu_has_feature(CPU_DE)));
+	printf("Page Size Extension %s\n", check(cpu_has_feature(CPU_PSE)));
+	printf("Time Stamp Counter %s\n", check(cpu_has_feature(CPU_TSC)));
+	printf("Model Specific Registers %s\n", check(cpu_has_feature(CPU_MSR)));
+	printf("Physical Address Extension %s\n", check(cpu_has_feature(CPU_PAE)));
+	printf("Model Check Exception %s\n", check(cpu_has_feature(CPU_MSE)));
+	printf("CMPXCHG8 Instruction %s\n", check(cpu_has_feature(CPU_CX8)));
+	printf("APIC %s\n", check(cpu_has_feature(CPU_APIC)));
+}
+
+
 
 int main(void)
 {
 	printf("CPU VENDOR - %s\n", cpu_get_vendor());
+	list_features();
 	return 0;
 }
