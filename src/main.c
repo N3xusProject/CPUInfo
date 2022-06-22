@@ -60,7 +60,10 @@ char* get_vendor_string(void)
     uint32_t unused, ebx, edx, ecx;
     cpuid(0, &unused, &ebx, &ecx, &edx);
 
+	// Vendor string stored here.
     static char vendor_str[13];
+
+	// Index into vendor string.
     uint8_t vendor_str_idx = 0;
 
 
