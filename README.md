@@ -8,8 +8,11 @@ This tool gives some information about your processor!<br>
 
 ## Building
 
-Make sure to have make and clang installed.<br> Building is easy as heck! Just
+Make sure to have make, gcc and libcpuinfo installed.<br> Building is easy as heck! Just
 type `make`!
+
+## Installing libcpuinfo
+Just do: ``make install_deps``
 
 ## Screenshot
 
