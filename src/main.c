@@ -55,7 +55,17 @@ void list_features(void)
 	printf("Physical Address Extension %s\n", check(cpu_has_feature(CPU_PAE)));
 	printf("Model Check Exception %s\n", check(cpu_has_feature(CPU_MSE)));
 	printf("CMPXCHG8 Instruction %s\n", check(cpu_has_feature(CPU_CX8)));
-	printf("APIC %s\n", check(cpu_has_feature(CPU_APIC)));
+	printf("Fast System Call %s\n", check(cpu_has_feature(CPU_SEP)));
+	printf("Memory Type Range %s\n", check(cpu_has_feature(CPU_MTRR)));
+	printf("Page Global Enable %s\n", check(cpu_has_feature(CPU_PGE)));
+	printf("Machine Check Architecture %s\n", check(cpu_has_feature(CPU_MCA)));
+	printf("Conditional Move Instruction %s\n", check(cpu_has_feature(CPU_CMOV)));
+	printf("Page Attribute Table %s\n", check(cpu_has_feature(CPU_PAT)));
+	printf("36-Bit Page Size %s\n", check(cpu_has_feature(CPU_PSE36)));
+	printf("ACPI %s\n", check(cpu_has_feature(CPU_ACPI)));
+	printf("MMX %s\n", check(cpu_has_feature(CPU_MMX)));
+	printf("FXSAVE And FXSTOR Instructions %s\n", check(cpu_has_feature(CPU_FXSR)));
+	printf("Streaming SMID Extension %s\n", check(cpu_has_feature(CPU_SSE)));
 }
 
 
