@@ -44,6 +44,9 @@
 #define CPUID_VENDOR_ELBRUS        "E2K MACHINE "
 
 
+uint32_t eax, ebx, ecx, edx;
+
+
 static inline void cpuid(uint32_t leaf, uint32_t* eax, uint32_t* ebx, uint32_t* ecx, uint32_t* edx)
 {
   __asm__ __volatile__("cpuid"
@@ -149,8 +152,52 @@ void get_vendor(const char* vendor_str)
 }
 
 
+// See https://en.wikipedia.org/wiki/Stepping_level
+void get_stepping_level(void)
+{
+    cpuid(1, &eax, &ebx, &ecx, &edx);
+    printf("CPU STEPPING LEVEL - 0x%X\n", eax & 0x7);
+}
+
+
+uint32_t get_model_number(void)
+{
+    cpuid(1, &eax, &ebx, &ecx, &edx);
+    return (eax >> 4) & 0x7;
+}
+
+
+uint32_t get_extended_model(void)
+{
+    cpuid(1, &eax, &ebx, &ecx, &edx);
+    return (eax >> 16) & 0x7;
+}
+
+
+void get_family(void)
+{
+    cpuid(1, &eax, &ebx, &ecx, &edx);
+    uint32_t model_number = get_model_number();
+    uint32_t extended_model = get_extended_model();
+    uint32_t stepping_level = eax & 0x7;
+}
+
+
+uint8_t get_processor_type(void)
+{
+    cpuid(1, &eax, &ebx, &ecx, &edx);
+    return eax & (1 << 13);
+}
+
+
 int main(void)
 {
     get_vendor(get_vendor_string());
+    get_stepping_level();
+
+    printf("CPU MODEL NUMBER - 0x%X\n", get_model_number());
+    printf("CPU EXTENDED MODEL - 0x%X\n", get_extended_model());
+    printf("CPU TYPE BIT - 0b%d\n", get_processor_type());
+
     return 0;
 }
