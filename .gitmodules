@@ -1,0 +1,6 @@
+[submodule "libcpuinfo"]
+	path = libcpuinfo
+	url = https://github.com/Ian-Marco-Moffett/libcpuinfo
+[submodule "lib/libcpuinfo"]
+	path = lib/libcpuinfo
+	url = https://github.com/Ian-Marco-Moffett/libcpuinfo
