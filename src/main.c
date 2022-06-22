@@ -65,7 +65,12 @@ void list_features(void)
 	printf("ACPI %s\n", check(cpu_has_feature(CPU_ACPI)));
 	printf("MMX %s\n", check(cpu_has_feature(CPU_MMX)));
 	printf("FXSAVE And FXSTOR Instructions %s\n", check(cpu_has_feature(CPU_FXSR)));
-	printf("Streaming SMID Extension %s\n", check(cpu_has_feature(CPU_SSE)));
+	printf("Streaming SIMD Extensions %s\n", check(cpu_has_feature(CPU_SSE)));
+	printf("Streaming SIMD Extensions 2 %s\n", check(cpu_has_feature(CPU_SSE2)));
+	printf("Self Snoop %s\n", check(cpu_has_feature(CPU_SS)));
+	printf("Multi-Threading %s\n", check(cpu_has_feature(CPU_HTT)));
+	printf("Thermal Monitor %s\n", check(cpu_has_feature(CPU_TM)));
+	printf("Pending Break Enable %s\n", check(cpu_has_feature(CPU_PBE)));
 }
 
 
