@@ -12,7 +12,7 @@ Make sure to have make, gcc and libcpuinfo installed.<br> Building is easy as he
 type `make`!
 
 ## Installing libcpuinfo
-Just do: ``make install_deps``
+Just do: ``git submodule update; make install_deps``
 
 ## Screenshot
 
