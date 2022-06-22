@@ -181,7 +181,7 @@ uint32_t get_extended_model(void)
 uint8_t get_processor_type(void)
 {
     cpuid(1, &eax, &ebx, &ecx, &edx);
-    return eax & (1 << 13) | eax & (1 << 12);
+    return (eax & (1 << 13)) << 1 | eax & (1 << 12);
 }
 
 
