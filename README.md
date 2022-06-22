@@ -1,7 +1,7 @@
 # CPUInfo
 
-![License](https://img.shields.io/github/license/Nexus-C/CPUInfo?style=for-the-badge)
-![Releases](https://img.shields.io/github/v/release/Nexus-C/CPUInfo?include_prereleases&style=for-the-badge)
+![License]({https://img.shields.io/github/license/Nexus-C/CPUInfo?style=for-the-badge})
+![Releases]({https://img.shields.io/github/v/release/Nexus-C/CPUInfo?include_prereleases&style=for-the-badge})
 
 ## About
 
