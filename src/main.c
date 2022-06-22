@@ -232,7 +232,7 @@ void feature_dump(void)
 	// Feature flags will be in EDX.
     cpuid(1, &eax, &ebx, &ecx, &edx);
 
-	printf("\nListing CPU features..\n[x] => supported, [] => not supported\n\n");
+	printf("\nListing CPU features..\n[+] => supported, [] => not supported\n\n");
 
 	const char* check = "[]";
 
