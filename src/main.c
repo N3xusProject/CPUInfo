@@ -90,6 +90,7 @@ int main(void)
 {
     printf("CPU VENDOR - %s\n", cpu_get_vendor());
     printf("CPU MODEL NUMBER - 0x%X\n", cpu_get_model_number());
+    printf("CPU FAMILY - 0x%X\n", cpu_get_family_value());
     list_features();
     return 0;
 }
